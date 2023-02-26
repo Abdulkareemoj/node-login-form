@@ -23,29 +23,29 @@ db.connect((error) => {
     }
 })
 
-/ set the view engine to ejs
+// set the view engine to ejs
 app.set('view engine', 'ejs');
 
 // use res.render to load up an ejs view file
 
 // index page
 app.get('/', (req, res) => {
-  res.render('pages/index');
+  res.render('index');
 });
 
 // about page
-app.get('/about', (req, res)=> {
-  res.render('pages/about');
-});
+// app.get('/about', (req, res)=> {
+//   res.render('views/pages/about');
+// });
 
 
-app.get("/register", (req, res) => {
-    res.render("register")
-})
+// app.get("/register", (req, res) => {
+//     res.render("/views/pages")
+// })
 
-app.get("/login", (req, res) => {
-    res.render("login")
-})
+// app.get("/login", (req, res) => {
+//     res.render("/views/pages")
+// })
 
 
 // app.post("/auth/register", (req, res) => {    
@@ -82,6 +82,6 @@ app.get("/login", (req, res) => {
 //     })
 // })
 
-// app.listen(5000, ()=> {
-//     console.log("server started on port 5000")
-// })
+app.listen(5000, ()=> {
+    console.log("server started on port 5000")
+})
