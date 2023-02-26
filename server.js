@@ -23,10 +23,21 @@ db.connect((error) => {
     }
 })
 
+/ set the view engine to ejs
+app.set('view engine', 'ejs');
 
-app.get("/", (req, res) => {
-    res.render("index")
-})
+// use res.render to load up an ejs view file
+
+// index page
+app.get('/', (req, res) => {
+  res.render('pages/index');
+});
+
+// about page
+app.get('/about', (req, res)=> {
+  res.render('pages/about');
+});
+
 
 app.get("/register", (req, res) => {
     res.render("register")
@@ -37,40 +48,40 @@ app.get("/login", (req, res) => {
 })
 
 
-app.post("/auth/register", (req, res) => {    
-    const { name, email, password, password_confirm } = req.body
+// app.post("/auth/register", (req, res) => {    
+//     const { name, email, password, password_confirm } = req.body
 
-    db.query('SELECT email FROM users WHERE email = ?', [email], async (error, result) => {
-        if(error){
-            console.log(error)
-        }
+//     db.query('SELECT email FROM users WHERE email = ?', [email], async (error, result) => {
+//         if(error){
+//             console.log(error)
+//         }
 
-        if( result.length > 0 ) {
-            return res.render('register', {
-                message: 'This email is already in use'
-            })
-        } else if(password !== password_confirm) {
-            return res.render('register', {
-                message: 'This email is already in use'
-            })
-        }
+//         if( result.length > 0 ) {
+//             return res.render('register', {
+//                 message: 'This email is already in use'
+//             })
+//         } else if(password !== password_confirm) {
+//             return res.render('register', {
+//                 message: 'This email is already in use'
+//             })
+//         }
 
-        let hashedPassword = await bcrypt.hash(password, 8)
+//         let hashedPassword = await bcrypt.hash(password, 8)
 
-        console.log(hashedPassword)
+//         console.log(hashedPassword)
        
-        db.query('INSERT INTO users SET?', {name: name, email: email, password: hashedPassword}, (err, result) => {
-            if(error) {
-                console.log(error)
-            } else {
-                return res.render('register', {
-                    message: 'User registered!'
-                })
-            }
-        })        
-    })
-})
+//         db.query('INSERT INTO users SET?', {name: name, email: email, password: hashedPassword}, (err, result) => {
+//             if(error) {
+//                 console.log(error)
+//             } else {
+//                 return res.render('register', {
+//                     message: 'User registered!'
+//                 })
+//             }
+//         })        
+//     })
+// })
 
-app.listen(5000, ()=> {
-    console.log("server started on port 5000")
-})
+// app.listen(5000, ()=> {
+//     console.log("server started on port 5000")
+// })
