@@ -8,7 +8,6 @@ const app = express();
 dotenv.config({ path: './.env'})
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,
-    
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE
@@ -30,24 +29,25 @@ app.set('view engine', 'ejs');
 
 // index page
 app.get('/', (req, res) => {
-  res.render('index');
-});
+  res.render('index')
+})
 
 // about page
-// app.get('/about', (req, res)=> {
-//   res.render('views/pages/about');
-// });
+app.get('/about', (req, res)=> {
+  res.render('..views/pages/about')
+})
 
+//register page
+app.get("/register", (req, res) => {
+    res.render('../views/pages/register')
+})
 
-// app.get("/register", (req, res) => {
-//     res.render("/views/pages")
-// })
+//login page
+app.get("/login", (req, res) => {
+    res.render('../views/pages/login')
+})
 
-// app.get("/login", (req, res) => {
-//     res.render("/views/pages")
-// })
-
-
+//auth route
 // app.post("/auth/register", (req, res) => {    
 //     const { name, email, password, password_confirm } = req.body
 
